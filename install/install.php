@@ -80,5 +80,7 @@ exit_if_failure($stmt);
 $stmt = $pdo->prepare("ALTER TABLE `{$_POST['table-prefix']}_topics` ADD FOREIGN KEY (`forum_id`) REFERENCES `{$_POST['table-prefix']}_forums` (`id`)");
 exit_if_failure($stmt);
 
+$pdo->commit();
+
 // Close database connection
 $pdo = null;

@@ -96,3 +96,19 @@ try {
 
 // Close database connection
 $pdo = null;
+
+// Write config file
+$config_details = "<?php
+// Forum Details
+const FORUM_NAME = '{$_POST['forum-name']}';
+// DB Details
+const DB_HOST = '{$_POST['host']}';
+const DB_NAME = '{$_POST['db-name']}';
+const DB_USER = '{$_POST['db-user']}';
+const DB_PASSWORD = '{$_POST['db-password']}';
+const TABLE_PREFIX = '{$_POST['table-prefix']}';
+";
+
+$config = fopen("../inc/config.php", 'w');
+fwrite($config, $config_details);
+fclose($config);

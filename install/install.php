@@ -46,8 +46,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $_POST['db-user'], $_POST['db-password'], $options);
 } catch (PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
-    die();
+    throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
 try {
@@ -89,9 +88,18 @@ try {
     exit_if_failure($stmt);
     $stmt = $pdo->prepare("ALTER TABLE `{$_POST['table-prefix']}_posts` ADD FOREIGN KEY (`user_id`) REFERENCES `{$_POST['table-prefix']}_users` (`id`)");
     exit_if_failure($stmt);
+    // Create admin user
+    $pdo->beginTransaction();
+    $password = password_hash($_POST['admin-password'], PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("INSERT INTO {$_POST['table-prefix']}_users (username, password) VALUES (?, ?)");
+    $stmt->execute([$_POST['admin-username'], $password]);
+    // Create a default forum
+    $stmt = $pdo->prepare("INSERT INTO {$_POST['table-prefix']}_forums (name) VALUES ('My First Forum')");
+    exit_if_failure($stmt);
+    $pdo->commit();
 } catch (PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
-    die();
+    $pdo->rollBack();
+    throw new PDOException($e->getMessage(), (int)$e->getCode());
 }
 
 // Close database connection

@@ -16,8 +16,12 @@ $options = [
     PDO::ATTR_AUTOCOMMIT => false
 ];
 
-try {
-    $pdo = new PDO($dsn, $user, $password, $options);
-} catch (PDOException $e) {
-    throw new PDOException($e->getMessage(), (int)$e->getCode());
+function get_pdo(): PDO
+{
+    try {
+        $pdo = new PDO($GLOBALS['dsn'], $GLOBALS['user'], $GLOBALS['password'], $GLOBALS['options']);
+    } catch (PDOException $e) {
+        throw new PDOException($e->getMessage(), (int)$e->getCode());
+    }
+    return $pdo;
 }

@@ -21,10 +21,12 @@ require_once 'inc/config.php';
 
         $stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_categories");
         $stmt->execute();
+        // Each category should have its own block of forums
         foreach ($stmt as $row) {
             $category_id = $row['id'];
             $category_name = $row['name'];
             echo '<div class="category-block">' . "\n";
+            // Since this is tabular data, we can use a table instead of CSS grid for lining things up
             echo '<table>' . "\n";
             // Headings
             echo '<thead><tr>';
@@ -42,7 +44,7 @@ require_once 'inc/config.php';
     ON 123_posts.topic_id = 123_topics.id INNER JOIN 123_forums ON 123_topics.forum_id = 123_forums.id WHERE 123_topics.forum_id = ?");
                 $num_posts->execute([$forum_row['id']]);
                 echo '<tr>';
-                echo '<td>' . $forum_row['name'] . '</td>';
+                echo '<td><a href="viewforum.php?id=' . $forum_row['id'] . '">' . $forum_row['name'] . '</a></td>';
                 echo '<td>' . $num_topics->rowCount() . '</td>';
                 echo '<td>' . $num_posts->rowCount() . '</td>';
                 echo '</tr>';

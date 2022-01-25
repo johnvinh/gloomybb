@@ -25,14 +25,15 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     $pdo = get_pdo();
     $table_prefix = TABLE_PREFIX;
 
-    $stmt = $pdo->prepare("SELECT password FROM {$table_prefix}_users WHERE username = ?");
+    $stmt = $pdo->prepare("SELECT id, password FROM {$table_prefix}_users WHERE username = ?");
     $stmt->execute([$_POST['username']]);
     // No users found
     if ($stmt->rowCount() === 0) {
         echo 'No users found with that username found!';
         die();
     }
-    $hashed_password = $stmt->fetch()['password'];
+    $results = $stmt->fetch();
+    $hashed_password = $results['password'];
     // Incorrect password entered
     if (!password_verify($_POST['password'], $hashed_password)) {
         echo 'Incorrect password!';
@@ -41,6 +42,7 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     // Valid login, so we can start setting up the session
     session_start();
     $_SESSION['username'] = $_POST['username'];
+    $_SESSION['user_id'] = $results['id'];
 
     echo 'Login successful! Redirecting to homepage...';
     header("refresh:2;url=index.php");

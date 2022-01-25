@@ -1,5 +1,6 @@
 <?php
 require_once 'inc/config.php';
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -15,6 +16,12 @@ require_once 'inc/config.php';
     </header>
     <main>
         <?php
+        if (isset($_SESSION['username'])) {
+        ?>
+        <p>You are logged in as <?php echo $_SESSION['username'] ?></p>
+        <p><a href="logout.php">Log-out</a></p>
+        <?php
+        }
         require_once 'inc/dbconnect.php';
         $pdo = get_pdo();
         $table_prefix = TABLE_PREFIX;

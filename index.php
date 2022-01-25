@@ -22,6 +22,12 @@ session_start();
         <p><a href="logout.php">Log-out</a></p>
         <?php
         }
+        else {
+        ?>
+            <p><a href="login.php">Login</a></p>
+            <p><a href="signup.php">Sign-up</a></p>
+        <?php
+        }
         require_once 'inc/dbconnect.php';
         $pdo = get_pdo();
         $table_prefix = TABLE_PREFIX;

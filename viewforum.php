@@ -42,7 +42,7 @@ $subforum_name->execute([$_GET['id']]);
             foreach ($stmt as $row) {
                 $posts_stmt = $pdo->prepare("SELECT id FROM {$table_prefix}_posts WHERE topic_id = ?");
                 $posts_stmt->execute([$row['id']]);
-                echo '<td>' . $row['title'] . '</td>';
+                echo '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . $row['title'] . '</a></td>';
                 echo '<td>' . $posts_stmt->rowCount() . '</td>';
             }
             echo '</tbody>';

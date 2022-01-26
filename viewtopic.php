@@ -31,7 +31,7 @@ $result = $stmt->fetch();
             <?php
             $category_stmt = $pdo->prepare("SELECT {$table_prefix}_categories.name, {$table_prefix}_categories.id FROM {$table_prefix}_categories INNER JOIN
     {$table_prefix}_forums ON {$table_prefix}_forums.category_id = {$table_prefix}_categories.id INNER JOIN
-    {$table_prefix}_topics ON {$table_prefix}_forums.id = {$table_prefix}_topics.forum_id WHERE {$table_prefix}_topics.forum_id = ?");
+    {$table_prefix}_topics ON {$table_prefix}_forums.id = {$table_prefix}_topics.forum_id WHERE {$table_prefix}_topics.id = ?");
             $category_stmt->execute([$_GET['id']]);
             $category_results = $category_stmt->fetch();
             $forum_stmt = $pdo->prepare("SELECT name FROM {$table_prefix}_forums WHERE id = ?");

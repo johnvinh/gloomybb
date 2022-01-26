@@ -69,7 +69,7 @@ $result = $stmt->fetch();
         $posts_stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_posts WHERE topic_id = ?");
         $posts_stmt->execute([$_GET['id']]);
         foreach ($posts_stmt as $post) {
-            echo '<div class="post">';
+            echo '<div id="post' . $post['id'] . '" class="post">';
             // User details
             echo '<dl>';
             echo '<dt>Username</dt>';

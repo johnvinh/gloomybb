@@ -28,6 +28,7 @@ $result = $stmt->fetch();
         <h1><?php echo FORUM_NAME . ' - ' . "{$result['title']}"; ?></h1>
     </header>
     <main>
+        <input type="button" id="new-reply" value="New Reply">
         <?php
         // Topic contents
         echo '<div class="post">';
@@ -35,8 +36,8 @@ $result = $stmt->fetch();
         // User details
         echo '<dl>';
         echo '<dt>Username</dt>';
-        $user_stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_users WHERE id = ?");
-        $user_stmt->execute([$result['id']]);
+        $user_stmt = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
+        $user_stmt->execute([$result['user_id']]);
         echo '<dd>' . $user_stmt->fetch()['username'] . '</dd>';
         echo '</dl>';
         // Post details
@@ -51,5 +52,17 @@ $result = $stmt->fetch();
         ?>
     </main>
 </div>
+<script type="text/javascript">
+    function getTopicId()
+    {
+        const regex = new RegExp('^.+?\\?id=(.+)$');
+        return regex.exec(window.location.href)[1];
+    }
+
+    document.querySelector('#new-reply').addEventListener('click', (e) =>
+    {
+        window.location.href = `newreply.php?id=${getTopicId()}`;
+    });
+</script>
 </body>
 </html>

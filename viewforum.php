@@ -44,7 +44,7 @@ $forum_result = $subforum_name->fetch();
         </div>
         <table>
             <?php
-            $stmt = $pdo->prepare("SELECT id, title FROM {$table_prefix}_topics WHERE id = ?");
+            $stmt = $pdo->prepare("SELECT id, title FROM {$table_prefix}_topics WHERE forum_id = ?");
             $stmt->execute([$id]);
             echo '<thead>';
             echo '<th>Topic Title</th>';
@@ -52,10 +52,12 @@ $forum_result = $subforum_name->fetch();
             echo '</thead>';
             echo '<tbody>';
             foreach ($stmt as $row) {
+                echo '<tr>';
                 $posts_stmt = $pdo->prepare("SELECT id FROM {$table_prefix}_posts WHERE topic_id = ?");
                 $posts_stmt->execute([$row['id']]);
                 echo '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . $row['title'] . '</a></td>';
                 echo '<td>' . $posts_stmt->rowCount() . '</td>';
+                echo '</tr>';
             }
             echo '</tbody>';
             ?>

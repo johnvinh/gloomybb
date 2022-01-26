@@ -25,7 +25,7 @@ $forum_result = $subforum_name->fetch();
 <body>
 <div id="content">
     <header>
-        <?php echo FORUM_NAME; ?>
+        <h1><?php echo FORUM_NAME . ' - ' . $forum_result['name']; ?></h1>
         <nav>
             <a href="index.php">Index</a> ->
             <?php

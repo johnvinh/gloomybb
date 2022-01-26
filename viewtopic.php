@@ -48,6 +48,25 @@ $result = $stmt->fetch();
         // End topic contents
         echo '</div>';
 
+        // Posts
+        $posts_stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_posts WHERE topic_id = ?");
+        $posts_stmt->execute([$_GET['id']]);
+        foreach ($posts_stmt as $post) {
+            echo '<div class="post">';
+            // User details
+            echo '<dl>';
+            echo '<dt>Username</dt>';
+            $user_stmt = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
+            $user_stmt->execute([$post['user_id']]);
+            echo '<dd>' . $user_stmt->fetch()['username'] . '</dd>';
+            echo '</dl>';
+            // Post details
+            echo '<div>';
+            echo $post['content'];
+            echo '</div>';
+
+            echo '</div>';
+        }
         $pdo = null;
         ?>
     </main>

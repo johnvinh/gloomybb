@@ -13,6 +13,9 @@ session_start();
 <div id="content">
     <header>
         <h1><?php echo FORUM_NAME; ?></h1>
+        <nav>
+            <a href="index.php">Index</a>
+        </nav>
     </header>
     <main>
         <?php

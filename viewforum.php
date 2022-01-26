@@ -12,19 +12,31 @@ $id = $_GET['id'];
 if (!($id = filter_var($id, FILTER_VALIDATE_INT)))
     die();
 // Forum ID is passed as a GET parameter
-$subforum_name = $pdo->prepare("SELECT name FROM {$table_prefix}_forums WHERE id = ?");
+$subforum_name = $pdo->prepare("SELECT name, category_id FROM {$table_prefix}_forums WHERE id = ?");
 $subforum_name->execute([$_GET['id']]);
+$forum_result = $subforum_name->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><?php echo FORUM_NAME . ' - ' . $subforum_name->fetch()['name']; ?></title>
+    <title><?php echo FORUM_NAME . ' - ' . $forum_result['name']; ?></title>
     <meta charset="utf-8">
 </head>
 <body>
 <div id="content">
     <header>
         <?php echo FORUM_NAME; ?>
+        <nav>
+            <a href="index.php">Index</a> ->
+            <?php
+            $category_stmt = $pdo->prepare("SELECT name FROM {$table_prefix}_categories WHERE id = ?");
+            $category_stmt->execute([$forum_result['category_id']]);
+            $category_name = $category_stmt->fetch()['name'];
+
+            echo '<a href="viewcategory.php?id=' . $forum_result['category_id'] . '">' . $category_name . '</a>' . '->';
+            echo '<a href="viewforum.php?id=' . $_GET['id'] . '">' . $forum_result['name'] . '</a>';
+            ?>
+        </nav>
     </header>
     <main>
         <div id="actions">

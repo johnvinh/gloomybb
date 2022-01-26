@@ -18,8 +18,9 @@ if (isset($_POST['posting']) && $_POST['posting'] === 'Post!') {
     $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_posts (content, topic_id, user_id) VALUES (?, ?, ?)");
     if ($stmt->execute([$_POST['post-content'], $_POST['topic_id'], $_SESSION['user_id']])) {
         echo 'Post successful!';
+        $new_post_id = $pdo->lastInsertId();
         // Redirect back to the topic
-//        header("refresh:2;url=${$_SERVER['HTTP_REFERER']}");
+        header("Location: viewtopic.php?id={$_POST['topic_id']}#post{$new_post_id}");
         $pdo->commit();
     }
     else

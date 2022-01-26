@@ -22,8 +22,9 @@ if (isset($_POST['newtopic']) && $_POST['newtopic'] === "Post") {
     $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_topics (title, content, forum_id, user_id) VALUES
 (?, ?, ?, ?)");
     if ($stmt->execute([$_POST['topic-name'], $_POST['topic-content'], $_POST['forum_id'], $_SESSION['user_id']])) {
+        $new_topic_id =  $pdo->lastInsertId();
         $pdo->commit();
-        echo 'Topic successfully posted!';
+        header("Location: viewtopic.php?id=${new_topic_id}");
         die();
     }
     else {

@@ -1,9 +1,11 @@
 .post {
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: table;
+    width: 100%;
 }
 
 .post dl, .post div {
+    display: table-cell;
     border: 1px solid black;
+    width: 50%;
 }
 

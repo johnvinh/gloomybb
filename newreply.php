@@ -2,6 +2,7 @@
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 session_start();
 $table_prefix = TABLE_PREFIX;
@@ -56,10 +57,17 @@ $topic_name = $pdo->prepare("SELECT title FROM {$table_prefix}_topics WHERE id =
 $topic_name->execute([$_GET['id']]);
 $topic_name = $topic_name->fetch();
 $title = 'New Reply';
-$navigation = '<a href="index.php">Index</a>-><a href="viewcategory.php?id=' . $category_details['id'] . '">'
-. $category_details['name'] . '</a>-><a href="viewforum.php?id=' . $forum_details['id'] . '">' . $forum_details['name'] .
-'</a>-><a href="viewtopic.php?id=' . $_GET['id'] . '">' . $topic_name['title'] . '</a>';
 
+// Navigation
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => "viewcategory.php?id={$category_details['id']}", 'name' => $category_details['name']],
+    ['url' => "viewforum.php?id={$forum_details['id']}", 'name' => $forum_details['name']],
+    ['url' => "viewtopic.php?id={$_GET['id']}", 'name' => $topic_name['title']]
+];
+$navigation = construct_navigation($links);
+
+// Main Content
 $content = '<form action="newreply.php" method="post">
             <div>
                 <label for="post-content">Message</label>
@@ -68,6 +76,7 @@ $content = '<form action="newreply.php" method="post">
             <input type="hidden" name="topic_id" value="' . $_GET['id'] . '">
             <input type="submit" name="posting" value="Post!">
         </form>';
+
 // Close DB connection
 $pdo = null;
 

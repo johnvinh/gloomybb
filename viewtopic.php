@@ -3,6 +3,7 @@ session_start();
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 // Topic ID must be specified in URL
 if (!isset($_GET['id'])) {
@@ -18,7 +19,6 @@ $result = $stmt->fetch();
 
 $title = $result['title'];
 // Navigation
-$navigation = '<a href="index.php">Index</a>';
 $category_stmt = $pdo->prepare("SELECT {$table_prefix}_categories.name, {$table_prefix}_categories.id FROM {$table_prefix}_categories INNER JOIN
     {$table_prefix}_forums ON {$table_prefix}_forums.category_id = {$table_prefix}_categories.id INNER JOIN
     {$table_prefix}_topics ON {$table_prefix}_forums.id = {$table_prefix}_topics.forum_id WHERE {$table_prefix}_topics.id = ?");
@@ -28,9 +28,13 @@ $forum_stmt = $pdo->prepare("SELECT name FROM {$table_prefix}_forums WHERE id = 
 $forum_stmt->execute([$result['forum_id']]);
 $forum_result = $forum_stmt->fetch();
 
-$navigation .= '<a href="viewcategory.php?id=' . $category_results['id'] . '">' . $category_results['name'] . '</a>' . '->';
-$navigation .= '<a href="viewforum.php?id=' . $result['forum_id'] . '">' . $forum_result['name'] . '</a>' . '->';
-$navigation .= '<a href="viewtopic.php?id=' . $_GET['id'] . '">' . $result['title'] . '</a>';
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => "viewcategory.php?id={$category_results['id']}", 'name' => $category_results['name']],
+    ['url' => "viewforum.php?id={$result['forum_id']}", 'name' => $forum_result['name']],
+    ['url' => "viewtopic.php?id={$_GET['id']}", 'name' => $result['title']]
+];
+$navigation = construct_navigation($links);
 // End Navigation
 
 // Main Content

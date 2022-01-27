@@ -1,6 +1,7 @@
 <?php
 require_once 'inc/config.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 session_start();
 
 $title = 'Index';
@@ -15,6 +16,12 @@ else {
     $content .= '<p><a href="login.php">Login</a></p>
             <p><a href="signup.php">Sign-up</a></p>';
 }
+
+// Navigation
+$links = [
+    ['url' => 'index.php', 'name' => 'Index']
+];
+$navigation = construct_navigation($links);
 
 // Main page content
 require_once 'inc/dbconnect.php';

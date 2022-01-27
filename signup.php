@@ -2,9 +2,14 @@
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 $title = 'Sign Up';
-$navigation = '<a href="index.php">Index</a>-><a href="signup.php">Sign Up</a>';
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => 'signup.php', 'name' => 'Sign Up']
+];
+$navigation = construct_navigation($links);
 
 // Submit button was clicked
 if (isset($_POST['signup']) && $_POST['signup'] === "Sign-up") {

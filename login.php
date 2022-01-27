@@ -2,6 +2,7 @@
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 // If the user clicked the submit button
 if (isset($_POST['login']) && $_POST['login'] === "Login!") {
@@ -52,7 +53,14 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
 }
 
 $title = 'Login';
-$navigation = '<a href="index.php">Index</a>-><a href="login.php">Login</a>';
+// Nevigation
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => 'login.php', 'name' => 'Login']
+];
+$navigation = construct_navigation($links);
+
+// Main Page Content
 $content = '<form action="login.php" method="post">
             <div>
                 <label for="username">Username</label>

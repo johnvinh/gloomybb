@@ -3,6 +3,7 @@ session_start();
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 $table_prefix = TABLE_PREFIX;
 
@@ -59,9 +60,15 @@ $category_name = $pdo->prepare("SELECT * FROM {$table_prefix}_categories WHERE i
 $category_name->execute([$forum_details['category_id']]);
 $category_name = $category_name->fetch();
 
-$navigation = '<a href="index.php">Index</a>->';
-$navigation .= '<a href="viewcategory.php?id=' . $category_name['id'] . '">' . $category_name['name'] . '</a>->';
-$navigation .= '<a href="viewforum.php?id=' . $forum_details['id'] . '">' . $forum_details['name'] . '</a>';
+// Navigation
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => "viewcategory.php?id={$category_name['id']}", 'name' => $category_name['name']],
+    ['url' => "viewforum.php?id={$forum_details['id']}", 'name' => $forum_details['name']]
+];
+$navigation = construct_navigation($links);
+
+// End Navigation
 
 $content = '<form action="newtopic.php" method="post">
             <div>

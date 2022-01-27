@@ -2,6 +2,7 @@
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
+require_once 'inc/helpers.php';
 
 // Ensure category ID is set
 if (!isset($_GET['id'])) {
@@ -16,8 +17,12 @@ $stmt->execute([$_GET['id']]);
 $result = $stmt->fetch();
 
 $title = $result['name'];
-$navigation = '<a href="index.php">Index</a>->';
-$navigation .= '<a href="viewcategory.php?id=' . $_GET['id'] . '">' . $result['name'] . '</a>';
+// Navigation
+$links = [
+    ['url' => 'index.php', 'name' => 'Index'],
+    ['url' => "viewcategory.php?id={$_GET['id']}", 'name' => $result['name']]
+];
+$navigation = construct_navigation($links);
 // Main content
 $content = '';
 $content .= '<div class="category-block">' . "\n";

@@ -1,6 +1,7 @@
 <?php
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
+require_once 'classes/Page.php';
 
 // If the user clicked the submit button
 if (isset($_POST['login']) && $_POST['login'] === "Login!") {
@@ -49,20 +50,10 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     // Close database connection
     $pdo = null;
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title><?php echo FORUM_NAME; ?> - Login</title>
-    <meta charset="utf-8">
-</head>
-<body>
-<div id="content">
-    <header>
-        <h1><?php echo FORUM_NAME; ?></h1>
-    </header>
-    <main>
-        <form action="login.php" method="post">
+
+$title = 'Login';
+$navigation = '<a href="index.php">Index</a>-><a href="login.php">Login</a>';
+$content = '<form action="login.php" method="post">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
@@ -72,8 +63,7 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
                 <input type="password" id="password" name="password">
             </div>
             <input type="submit" name="login" value="Login!">
-        </form>
-    </main>
-</div>
-</body>
-</html>
+        </form>';
+
+$page = new Page($title, $navigation, $content);
+$page->write_html();

@@ -1,6 +1,10 @@
 <?php
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
+require_once 'classes/Page.php';
+
+$title = 'Sign Up';
+$navigation = '<a href="index.php">Index</a>-><a href="signup.php">Sign Up</a>';
 
 // Submit button was clicked
 if (isset($_POST['signup']) && $_POST['signup'] === "Sign-up") {
@@ -45,19 +49,8 @@ if (isset($_POST['signup']) && $_POST['signup'] === "Sign-up") {
         die();
     }
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title><?php echo FORUM_NAME; ?> - Sign-up</title>
-</head>
-<body>
-<div id="content">
-    <header>
-        <h1><?php echo FORUM_NAME; ?> - Sign-up</h1>
-    </header>
-    <main>
-        <form action="signup.php" method="post">
+
+$content = '<form action="signup.php" method="post">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
@@ -67,8 +60,7 @@ if (isset($_POST['signup']) && $_POST['signup'] === "Sign-up") {
                 <input type="password" id="password" name="password">
             </div>
             <input type="submit" value="Sign-up" name="signup">
-        </form>
-    </main>
-</div>
-</body>
-</html>
+        </form>';
+
+$page = new Page($title, $navigation, $content);
+$page->write_html();

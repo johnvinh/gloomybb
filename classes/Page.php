@@ -22,7 +22,7 @@ class Page
         <!DOCTYPE html>
         <html lang="en">
         <head>
-            <title><?php echo FORUM_NAME . ' - ' . "$this->title"; ?>x</title>
+            <title><?php echo FORUM_NAME . ' - ' . "$this->title"; ?></title>
             <meta charset="utf-8">
             <link rel="stylesheet" href="style.css">
         </head>

@@ -36,6 +36,14 @@ class Page
         </header>
         <main>
         <?php
+        // Login/logout
+        if (isset($_SESSION['username'])) {
+            echo '<p>You are logged in as ' . $_SESSION['username'] . '</p>
+        <p><a href="logout.php">Log-out</a></p>';
+        }
+        else {
+            echo '<div><a href="login.php">Login</a> <a href="signup.php">Sign-up</a></div>';
+        }
         echo $this->content;
         ?>
         </main>

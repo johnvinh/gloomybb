@@ -4,6 +4,8 @@ require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
 require_once 'inc/helpers.php';
 
+session_start();
+
 $table_prefix = TABLE_PREFIX;
 $pdo = get_pdo();
 

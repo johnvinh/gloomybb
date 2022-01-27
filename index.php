@@ -7,15 +7,6 @@ session_start();
 $title = 'Index';
 $navigation = '<a href="index.php">Index</a>';
 $content = '';
-// Login/logout
-if (isset($_SESSION['username'])) {
-    $content .= '<p>You are logged in as ' . $_SESSION['username'] . '</p>
-        <p><a href="logout.php">Log-out</a></p>';
-}
-else {
-    $content .= '<p><a href="login.php">Login</a></p>
-            <p><a href="signup.php">Sign-up</a></p>';
-}
 
 // Navigation
 $links = [

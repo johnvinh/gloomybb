@@ -4,6 +4,8 @@ require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
 require_once 'inc/helpers.php';
 
+session_start();
+
 // Ensure category ID is set
 if (!isset($_GET['id'])) {
     echo 'Missing category ID!';

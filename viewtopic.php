@@ -59,7 +59,7 @@ $result = $stmt->fetch();
         echo '</dl>';
         // Post details
         echo '<div>';
-        echo $result['content'];
+        echo htmlspecialchars($result['content']);
         echo '</div>';
 
         // End topic contents
@@ -79,7 +79,7 @@ $result = $stmt->fetch();
             echo '</dl>';
             // Post details
             echo '<div>';
-            echo $post['content'];
+            echo htmlspecialchars($post['content']);
             echo '</div>';
 
             echo '</div>';

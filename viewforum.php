@@ -50,7 +50,7 @@ foreach ($stmt as $row) {
     $content .= '<tr>';
     $posts_stmt = $pdo->prepare("SELECT id FROM {$table_prefix}_posts WHERE topic_id = ?");
     $posts_stmt->execute([$row['id']]);
-    $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . $row['title'] . '</a></td>';
+    $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a></td>';
     $content .= '<td>' . $posts_stmt->rowCount() . '</td>';
     $content .= '</tr>';
 }

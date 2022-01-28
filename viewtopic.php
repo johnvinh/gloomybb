@@ -17,7 +17,7 @@ $stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_topics WHERE id = ?");
 $stmt->execute([$_GET['id']]);
 $result = $stmt->fetch();
 
-$title = $result['title'];
+$title = htmlspecialchars($result['title']);
 // Navigation
 $category_stmt = $pdo->prepare("SELECT {$table_prefix}_categories.name, {$table_prefix}_categories.id FROM {$table_prefix}_categories INNER JOIN
     {$table_prefix}_forums ON {$table_prefix}_forums.category_id = {$table_prefix}_categories.id INNER JOIN

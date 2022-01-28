@@ -39,11 +39,25 @@ $content =
             <input type="button" id="new-topic" value="New Topic">
         </div>
         <table>';
-$stmt = $pdo->prepare("SELECT id, title FROM {$table_prefix}_topics WHERE forum_id = ?");
+$stmt = $pdo->prepare("SELECT id, title, user_id FROM {$table_prefix}_topics WHERE forum_id = ?");
 $stmt->execute([$id]);
+
+// Getting the usernames of all unique posters
+$distinct_authors_stmt = $pdo->prepare("SELECT DISTINCT(user_id) FROM {$table_prefix}_topics");
+$distinct_authors_stmt->execute();
+$usernames = [];
+foreach ($distinct_authors_stmt as $row) {
+    $username = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
+    $username->execute([$row['user_id']]);
+    $username = $username->fetch()['username'];
+    $usernames[$row['user_id']] = $username;
+}
+
+// Setting up the table
 $content .= '<thead>';
 $content .= '<th>Topic Title</th>';
 $content .= '<th>Replies</th>';
+$content .= '<th>Author</th>';
 $content .= '</thead>';
 $content .= '<tbody>';
 foreach ($stmt as $row) {
@@ -52,6 +66,7 @@ foreach ($stmt as $row) {
     $posts_stmt->execute([$row['id']]);
     $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a></td>';
     $content .= '<td>' . $posts_stmt->rowCount() . '</td>';
+    $content .= '<td>' . $usernames[$row['user_id']] . '</td>';
     $content .= '</tr>';
 }
 $content .= '</tbody></table>';

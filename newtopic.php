@@ -83,5 +83,5 @@ $content = '<form action="newtopic.php" method="post">
             <input type="submit" name="newtopic" value="Post">
         </form>';
 
-$page = new Page($title, $navigation, $content);
+$page = new Page($title, $navigation, $content, "scripts/newtopic.js");
 $page->write_html();

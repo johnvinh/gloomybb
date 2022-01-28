@@ -30,7 +30,7 @@ foreach ($stmt as $row) {
     $content .= '<table>' . "\n";
     // Headings
     $content .= '<thead><tr>';
-    $content .= '<th>' . $category_name . '</th>';
+    $content .= '<th><a href="viewcategory.php?id=' . $category_id . '">'. $category_name . '</a></th>';
     $content .= '<th>Topics</th>';
     $content .= '<th>Posts</th>';
     $content .= '</tr></thead>';

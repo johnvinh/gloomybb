@@ -78,6 +78,6 @@ foreach ($posts_stmt as $post) {
 }
 $pdo = null;
 // End Main Content
-$script = 'viewtopic.js';
+$script = 'scripts/viewtopic.js';
 $page = new Page($title, $navigation, $content, $script);
 $page->write_html();

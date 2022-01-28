@@ -51,7 +51,7 @@ class Page
     </body>
         <?php
         if (!empty($this->script)) {
-            echo '<script type="text/javascript" src="' . $this->script . '"></script></script>';
+            echo '<script type="text/javascript" src="' . $this->script . '"></script>';
         }
         ?>
     </html>

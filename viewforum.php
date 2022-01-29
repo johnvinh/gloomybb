@@ -18,6 +18,16 @@ if (!($id = filter_var($id, FILTER_VALIDATE_INT)))
 // Forum ID is passed as a GET parameter
 $subforum_name = $pdo->prepare("SELECT name, category_id FROM {$table_prefix}_forums WHERE id = ?");
 $subforum_name->execute([$_GET['id']]);
+// User entered an invalid forum ID, probably by changing the GET parameters
+if ($subforum_name->rowCount() === 0) {
+    $content = "That forum does not exist.";
+    $navigation = construct_navigation([
+        ['url' => 'index.php', 'name' => 'Index']
+    ]);
+    $page = new Page("No Such Forum", $navigation, $content);
+    $page->write_html();
+    die();
+}
 $forum_result = $subforum_name->fetch();
 $title = $forum_result['name'];
 // Navigation

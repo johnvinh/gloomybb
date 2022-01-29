@@ -38,8 +38,7 @@ if (isset($_POST['newtopic']) && $_POST['newtopic'] === "Post") {
 
 // Ensure user is logged in before continuing
 if (!isset($_SESSION['user_id'])) {
-    echo 'You need to login first!';
-    header('refresh:2;url=login.php');
+    header("Location: login.php");
     die();
 }
 // Ensure there's a forum id

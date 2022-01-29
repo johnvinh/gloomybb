@@ -10,6 +10,10 @@ $content = "";
 if (isset($_SERVER['HTTP_REFERER']) && str_contains($_SERVER['HTTP_REFERER'], "viewtopic.php")) {
     $content .= "You need to be logged in to post replies.";
 }
+// Or from the newtopic page
+else if (isset($_SERVER['HTTP_REFERER']) && str_contains($_SERVER['HTTP_REFERER'], "viewforum.php")) {
+    $content .= "You need to be logged into post new topics.";
+}
 
 // If the user clicked the submit button
 if (isset($_POST['login']) && $_POST['login'] === "Login!") {

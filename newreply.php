@@ -34,7 +34,6 @@ if (isset($_POST['posting']) && $_POST['posting'] === 'Post!') {
 
 // Require a user to be logged in
 if (!isset($_SESSION['user_id'])) {
-    echo 'You need to be logged in!';
     header('Location: login.php');
     die();
 }

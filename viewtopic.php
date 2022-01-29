@@ -15,6 +15,15 @@ $table_prefix = TABLE_PREFIX;
 $pdo = get_pdo();
 $stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_topics WHERE id = ?");
 $stmt->execute([$_GET['id']]);
+// If the user entered an invalid topic ID
+if ($stmt->rowCount() === 0) {
+    $navigation = construct_navigation([
+        ['url' => 'index.php', 'name' => 'Index']
+    ]);
+    $page = new Page("No Such Topic", $navigation, "That topic does not exist.");
+    $page->write_html();
+    die();
+}
 $result = $stmt->fetch();
 
 $title = htmlspecialchars($result['title']);

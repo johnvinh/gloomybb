@@ -35,7 +35,7 @@ if (isset($_POST['posting']) && $_POST['posting'] === 'Post!') {
 // Require a user to be logged in
 if (!isset($_SESSION['user_id'])) {
     echo 'You need to be logged in!';
-//    header('refresh:2;url=login.php');
+    header('Location: login.php');
     die();
 }
 // Ensure topic id is specified

@@ -4,6 +4,13 @@ require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
 require_once 'inc/helpers.php';
 
+$content = "";
+
+// Check if the user was referred from the viewtopic page
+if (isset($_SERVER['HTTP_REFERER']) && str_contains($_SERVER['HTTP_REFERER'], "viewtopic.php")) {
+    $content .= "You need to be logged in to post replies.";
+}
+
 // If the user clicked the submit button
 if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     // Need to use empty() instead of isset() since clicking the button will always result
@@ -61,7 +68,7 @@ $links = [
 $navigation = construct_navigation($links);
 
 // Main Page Content
-$content = '<form action="login.php" method="post">
+$content .= '<form action="login.php" method="post">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">

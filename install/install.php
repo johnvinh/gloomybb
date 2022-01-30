@@ -1,4 +1,7 @@
 <?php
+// EST
+date_default_timezone_set("America/New_York");
+
 function exit_if_failure(PDOStatement $stmt)
 {
     if (!$stmt->execute()) {
@@ -55,7 +58,8 @@ try {
     $stmt = $pdo->prepare("CREATE TABLE `{$_POST['table-prefix']}_users` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `joined_at` datetime NOT NULL
 )");
     exit_if_failure($stmt);
     $stmt = $pdo->prepare("CREATE TABLE `{$_POST['table-prefix']}_categories` (
@@ -74,14 +78,16 @@ try {
   `title` varchar(30) NOT NULL,
   `content` text NOT NULL,
   `forum_id` int NOT NULL,
-  `user_id` int NOT NULL
+  `user_id` int NOT NULL,
+  `posted_at` datetime NOT NULL
 )");
     exit_if_failure($stmt);
     $stmt = $pdo->prepare("CREATE TABLE `{$_POST['table-prefix']}_posts` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
   `topic_id` int NOT NULL,
-  `user_id` int NOT NULL
+  `user_id` int NOT NULL,
+  `posted_at` datetime NOT NULL
 )");
     exit_if_failure($stmt);
 
@@ -99,8 +105,8 @@ try {
     // Create admin user
     $pdo->beginTransaction();
     $password = password_hash($_POST['admin-password'], PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare("INSERT INTO {$_POST['table-prefix']}_users (username, password) VALUES (?, ?)");
-    $stmt->execute([$_POST['admin-username'], $password]);
+    $stmt = $pdo->prepare("INSERT INTO {$_POST['table-prefix']}_users (username, password, joined_at) VALUES (?, ?, ?)");
+    $stmt->execute([$_POST['admin-username'], $password, date('Y-m-d H:i:s')]);
     // Create a default category
     $stmt = $pdo->prepare("INSERT INTO {$_POST['table-prefix']}_categories (name) VALUES ('My First Category')");
     exit_if_failure($stmt);

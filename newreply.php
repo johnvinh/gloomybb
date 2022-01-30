@@ -1,4 +1,7 @@
 <?php
+// EST
+date_default_timezone_set("America/New_York");
+
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
@@ -17,8 +20,8 @@ if (isset($_POST['posting']) && $_POST['posting'] === 'Post!') {
 
     // Insert post into DB
     $pdo = get_pdo();
-    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_posts (content, topic_id, user_id) VALUES (?, ?, ?)");
-    if ($stmt->execute([$_POST['post-content'], $_POST['topic_id'], $_SESSION['user_id']])) {
+    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_posts (content, topic_id, user_id, posted_at) VALUES (?, ?, ?, ?)");
+    if ($stmt->execute([$_POST['post-content'], $_POST['topic_id'], $_SESSION['user_id'], date('Y-m-d H:i:s')])) {
         echo 'Post successful!';
         $new_post_id = $pdo->lastInsertId();
         // Redirect back to the topic

@@ -1,4 +1,7 @@
 <?php
+// EST
+date_default_timezone_set("America/New_York");
+
 session_start();
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
@@ -22,9 +25,9 @@ if (isset($_POST['newtopic']) && $_POST['newtopic'] === "Post") {
 
     // Create the topic in the DB
     $pdo = get_pdo();
-    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_topics (title, content, forum_id, user_id) VALUES
-(?, ?, ?, ?)");
-    if ($stmt->execute([$_POST['topic-name'], $_POST['topic-content'], $_POST['forum_id'], $_SESSION['user_id']])) {
+    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_topics (title, content, forum_id, user_id, posted_at) VALUES
+(?, ?, ?, ?, ?)");
+    if ($stmt->execute([$_POST['topic-name'], $_POST['topic-content'], $_POST['forum_id'], $_SESSION['user_id'], date('Y-m-d H:i:s')])) {
         $new_topic_id =  $pdo->lastInsertId();
         $pdo->commit();
         header("Location: viewtopic.php?id=${new_topic_id}");
@@ -51,8 +54,7 @@ else if (!isset($_GET['forum_id'])) {
 $title = 'New Topic';
 // Forum and category details
 $pdo = get_pdo();
-$stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_forums INNER JOIN {$table_prefix}_topics ON
-    {$table_prefix}_forums.id = {$table_prefix}_topics.forum_id WHERE {$table_prefix}_forums.id = ?");
+$stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_forums WHERE {$table_prefix}_forums.id = ?");
 $stmt->execute([$_GET['forum_id']]);
 $forum_details = $stmt->fetch();
 $category_name = $pdo->prepare("SELECT * FROM {$table_prefix}_categories WHERE id = ?");

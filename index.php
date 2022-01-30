@@ -40,8 +40,8 @@ foreach ($stmt as $row) {
     foreach ($forum_stmt as $forum_row) {
         $num_topics = $pdo->prepare("SELECT * FROM {$table_prefix}_topics WHERE forum_id = ?");
         $num_topics->execute([$forum_row['id']]);
-        $num_posts = $pdo->prepare("SELECT 123_posts.id FROM 123_posts INNER JOIN 123_topics
-    ON 123_posts.topic_id = 123_topics.id INNER JOIN 123_forums ON 123_topics.forum_id = 123_forums.id WHERE 123_topics.forum_id = ?");
+        $num_posts = $pdo->prepare("SELECT {$table_prefix}_posts.id FROM {$table_prefix}_posts INNER JOIN {$table_prefix}_topics
+    ON {$table_prefix}_posts.topic_id = {$table_prefix}_topics.id INNER JOIN {$table_prefix}_forums ON {$table_prefix}_topics.forum_id = {$table_prefix}_forums.id WHERE {$table_prefix}_topics.forum_id = ?");
         $num_posts->execute([$forum_row['id']]);
         $content .= '<tr>';
         $content .= '<td><a href="viewforum.php?id=' . $forum_row['id'] . '">' . $forum_row['name'] . '</a></td>';

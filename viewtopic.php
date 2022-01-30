@@ -57,6 +57,8 @@ $content .= '<dt>Username</dt>';
 $user_stmt = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
 $user_stmt->execute([$result['user_id']]);
 $content .= '<dd>' . $user_stmt->fetch()['username'] . '</dd>';
+$content .= '<dt>Posted At</dt>';
+$content .= '<dd>' . $result['posted_at'] . '</dd>';
 $content .= '</dl>';
 // Post details
 $content .= '<div>';
@@ -77,6 +79,8 @@ foreach ($posts_stmt as $post) {
     $user_stmt = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
     $user_stmt->execute([$post['user_id']]);
     $content .= '<dd>' . $user_stmt->fetch()['username'] . '</dd>';
+    $content .= '<dt>Posted At</dt>';
+    $content .= '<dd>' . $post['posted_at'] . '</dd>';
     $content .= '</dl>';
     // Post details
     $content .= '<div>';

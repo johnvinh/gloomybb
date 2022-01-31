@@ -68,16 +68,22 @@ $content .= '<thead>';
 $content .= '<th>Topic Title</th>';
 $content .= '<th>Replies</th>';
 $content .= '<th>Author</th>';
+$content .= '<th>Last Post</th>';
 $content .= '</thead>';
 $content .= '<tbody>';
 foreach ($stmt as $row) {
     $content .= '<tr>';
-    $posts_stmt = $pdo->prepare("SELECT id FROM {$table_prefix}_posts WHERE topic_id = ?");
+    $posts_stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_posts WHERE topic_id = ? ORDER BY posted_at DESC");
     $posts_stmt->execute([$row['id']]);
+    $posts_content = $posts_stmt->fetch();
     $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a>';
     $content .= '<p>' . $row['posted_at'] . '</p></td>';
     $content .= '<td>' . $posts_stmt->rowCount() . '</td>';
     $content .= '<td>' . $usernames[$row['user_id']] . '</td>';
+    if ($posts_stmt->rowCount() > 0)
+        $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . "#post{$posts_content['id']}" . '">' . $posts_content['posted_at'] . '</a></td>';
+    else
+        $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . $row['posted_at'] . '</a></td>';
     $content .= '</tr>';
 }
 $content .= '</tbody></table>';

@@ -48,8 +48,8 @@ $content =
     '<div id="actions">
             <input type="button" id="new-topic" value="New Topic">
         </div>
-        <table>';
-$stmt = $pdo->prepare("SELECT id, title, user_id FROM {$table_prefix}_topics WHERE forum_id = ?");
+        <table class="topics">';
+$stmt = $pdo->prepare("SELECT id, title, user_id, posted_at FROM {$table_prefix}_topics WHERE forum_id = ?");
 $stmt->execute([$id]);
 
 // Getting the usernames of all unique posters
@@ -74,7 +74,8 @@ foreach ($stmt as $row) {
     $content .= '<tr>';
     $posts_stmt = $pdo->prepare("SELECT id FROM {$table_prefix}_posts WHERE topic_id = ?");
     $posts_stmt->execute([$row['id']]);
-    $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a></td>';
+    $content .= '<td><a href="viewtopic.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a>';
+    $content .= '<p>' . $row['posted_at'] . '</p></td>';
     $content .= '<td>' . $posts_stmt->rowCount() . '</td>';
     $content .= '<td>' . $usernames[$row['user_id']] . '</td>';
     $content .= '</tr>';

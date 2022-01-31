@@ -1,4 +1,7 @@
 <?php
+// EST
+date_default_timezone_set("America/New_York");
+
 require_once 'inc/config.php';
 require_once 'inc/dbconnect.php';
 require_once 'classes/Page.php';
@@ -41,9 +44,9 @@ if (isset($_POST['signup']) && $_POST['signup'] === "Sign-up") {
         die();
     }
     // Since the username isn't taken, we can safely create this user
-    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_users (username, password) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_users (username, password, joined_at) VALUES (?, ?, ?)");
     $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    if ($stmt->execute([$_POST['username'], $hashed_password])) {
+    if ($stmt->execute([$_POST['username'], $hashed_password, date('Y-m-d H:i:s')])) {
         echo 'Registration successful!';
         $pdo->commit();
         header('refresh:2;url=index.php');

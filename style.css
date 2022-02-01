@@ -12,3 +12,16 @@
 .topics {
     border-spacing: 1em;
 }
+
+.button {
+    display: inline-block;
+    float: right;
+    font-family: Verdana, sans-serif;
+    background-color: darkgrey;
+    border: 0;
+    padding: 0.5em;
+}
+
+.button:visited {
+    color: inherit;
+}

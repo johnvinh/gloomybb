@@ -62,6 +62,10 @@ $content .= '<dd>' . $result['posted_at'] . '</dd>';
 $content .= '</dl>';
 // Post details
 $content .= '<div>';
+// Delete button
+if ($_SESSION['user_id'] === $result['user_id']) {
+    $content .= '<a class="button" href="deletetopic.php?id=' . $result['id'] . '">Delete</a>';
+}
 $content .= htmlspecialchars($result['content']);
 $content .= '</div>';
 
@@ -84,6 +88,10 @@ foreach ($posts_stmt as $post) {
     $content .= '</dl>';
     // Post details
     $content .= '<div>';
+    // Delete button
+    if ($_SESSION['user_id'] === $post['user_id']) {
+        $content .= '<a class="button" href="deletepost.php?id=' . $post['id'] . '">Delete</a>';
+    }
     $content .= htmlspecialchars($post['content']);
     $content .= '</div>';
 

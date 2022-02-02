@@ -49,7 +49,7 @@ $content =
             <input type="button" id="new-topic" value="New Topic">
         </div>
         <table class="topics">';
-$stmt = $pdo->prepare("SELECT id, title, user_id, posted_at FROM {$table_prefix}_topics WHERE forum_id = ?");
+$stmt = $pdo->prepare("SELECT id, title, user_id, posted_at FROM {$table_prefix}_topics WHERE forum_id = ? ORDER BY posted_at DESC");
 $stmt->execute([$id]);
 
 // Getting the usernames of all unique posters

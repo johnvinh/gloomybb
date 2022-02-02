@@ -93,5 +93,5 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
 
 $title = 'Login';
 
-$page = new Page($title, $navigation, $content);
+$page = new Page($title, $navigation, $content, "scripts/login.js");
 $page->write_html();

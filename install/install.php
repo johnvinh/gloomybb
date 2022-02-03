@@ -120,6 +120,7 @@ try {
 
 // Close database connection
 $pdo = null;
+$forum_root = dirname(__FILE__, 2) . '/';
 
 // Write config file
 $config_details = "<?php
@@ -131,6 +132,7 @@ const DB_NAME = '{$_POST['db-name']}';
 const DB_USER = '{$_POST['db-user']}';
 const DB_PASSWORD = '{$_POST['db-password']}';
 const TABLE_PREFIX = '{$_POST['table-prefix']}';
+const FORUM_ROOT = '{$forum_root}';
 ";
 
 $config = fopen("../inc/config.php", 'w');

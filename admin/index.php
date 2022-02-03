@@ -18,3 +18,14 @@ else if ($_SESSION['user_id'] !== 1) {
     $page->write_html();
     die();
 }
+
+$content = '<form action="addcategory.php" method="post">
+<div>
+<label for="category-name">Category Name</label>
+<input type="text" id="category-name" name="category-name">
+</div>
+<input type="submit" name="submitting" value="Add Category">
+</form>
+';
+$page = new Page("Admin Control Panel", $navigation, $content);
+$page->write_html();

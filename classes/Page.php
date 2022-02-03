@@ -1,5 +1,5 @@
 <?php
-require_once 'inc/config.php';
+require_once dirname(__FILE__, 2) . '/inc/config.php';
 
 class Page
 {

@@ -1,6 +1,11 @@
 <?php
 require_once dirname(__FILE__, 2) . '/inc/config.php';
 require_once FORUM_ROOT . 'inc/dbconnect.php';
+session_start();
+
+if (!isset($_SESSION['user_id']) || !($_SESSION['user_id'] === 1)) {
+    die();
+}
 
 if (isset($_POST['submitting']) && $_POST['submitting'] === 'Add Category') {
     // Make sure the category name is filled

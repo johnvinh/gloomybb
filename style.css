@@ -25,3 +25,16 @@
 .button:visited {
     color: inherit;
 }
+
+#content {
+    margin: auto;
+    width: 50%;
+}
+
+#content table {
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+}

@@ -90,7 +90,7 @@ foreach ($posts_stmt as $post) {
     // Post details
     $content .= '<div class="post-content">';
     // Delete button
-    if ($_SESSION['user_id'] === $post['user_id']) {
+    if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id']) {
         $content .= '<div class="post-actions">';
         $content .= '<a class="button" href="deletepost.php?id=' . $post['id'] . '">Delete</a>';
         $content .= '</div>';

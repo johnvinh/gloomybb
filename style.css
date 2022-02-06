@@ -4,17 +4,28 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #CEC9E1;
+    background-color: #FAFAFA;
+    margin: 0;
 }
 
 #content header {
-    background-color: #B8B9DD;
+    background-color: #DB5461;
+    color: #E3F2FD;
     text-align: center;
+    padding: 1em;
+}
+
+#content header a {
+    color: #E3F2FD;
+}
+
+#content h1 {
+    margin: 0;
 }
 
 #content main {
     margin: auto;
-    width: 30%;
+    width: 60%;
 }
 
 main table {
@@ -25,14 +36,19 @@ main table {
     text-align: center;
 }
 
-a {
-    color: #2A503B;
+a, a:visited {
+    color: #686963;
 }
 
 .post {
     padding: 1em;
     display: flex;
     background-color: #F2F2EC;
+}
+
+.post dl {
+    white-space: nowrap;
+    margin-right: 1em;
 }
 
 .post:nth-child(odd) {

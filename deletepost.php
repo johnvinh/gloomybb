@@ -61,7 +61,7 @@ if (!isset($_SESSION['user_id'])) {
     $page->write_html();
     die();
 }
-else if ($_SESSION['user_id'] !== $result['user_id']) {
+else if ($_SESSION['user_id'] !== $result['user_id'] && $_SESSION['user_id'] !== 1) {
     $page = new Page("Delete Post", $navigation, "You do not have permission to delete that!");
     $page->write_html();
     die();

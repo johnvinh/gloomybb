@@ -42,6 +42,10 @@ $content .= '</select>
 <label for="forum-name">Forum Name</label>
 <input type="text" id="forum-name" name="forum-name">
 </div>
+<div>
+<label for="forum-description">Forum Description</label>
+<input type="text" id="forum-description" name="forum-description">
+</div>
 <input type="submit" name="submitting" value="Add Forum">
 </form>
 ';

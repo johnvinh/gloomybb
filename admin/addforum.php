@@ -20,13 +20,28 @@ if (isset($_POST['submitting']) && $_POST['submitting'] === 'Add Forum') {
 
     $pdo = get_pdo();
     $table_prefix = TABLE_PREFIX;
-    $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_forums (name, category_id) VALUES (?, ?)");
-    if ($stmt->execute([$_POST['forum-name'], $_POST['category']])) {
-        echo 'Forum successfully added!';
-        header('refresh:2;url=index.php');
-        $pdo->commit();
+    // Forum description was not entered
+    if (empty($_POST['forum-description'])) {
+        $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_forums (name, category_id) VALUES (?, ?)");
+        if ($stmt->execute([$_POST['forum-name'], $_POST['category']])) {
+            echo 'Forum successfully added!';
+            header('refresh:2;url=index.php');
+            $pdo->commit();
+        }
+        else {
+            $pdo->rollBack();
+        }
     }
+    // Forum description was entered
     else {
-        $pdo->rollBack();
+        $stmt = $pdo->prepare("INSERT INTO {$table_prefix}_forums (name, description, category_id) VALUES (?, ?, ?)");
+        if ($stmt->execute([$_POST['forum-name'], $_POST['forum-description'], $_POST['category']])) {
+            echo 'Forum successfully added!';
+            header('refresh:2;url=index.php');
+            $pdo->commit();
+        }
+        else {
+            $pdo->rollBack();
+        }
     }
 }

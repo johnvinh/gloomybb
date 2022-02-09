@@ -1,5 +1,5 @@
 # GloomyBB
-![GloomyBB](https://i.imgur.com/KzI9IBq.png)
+![GloomyBB](https://i.imgur.com/ZcDjdxG.png)
 GloomyBB is a simple forum software written in vanilla PHP with a MariaDB/MySQL database.
 It is currently still in early development but is usable despite lacking many modern forum features.
 ## Usage

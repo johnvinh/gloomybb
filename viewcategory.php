@@ -46,7 +46,8 @@ foreach ($forum_stmt as $forum_row) {
     ON {$table_prefix}_posts.topic_id = {$table_prefix}_topics.id INNER JOIN {$table_prefix}_forums ON {$table_prefix}_topics.forum_id = {$table_prefix}_forums.id WHERE {$table_prefix}_topics.forum_id = ?");
     $num_posts->execute([$forum_row['id']]);
     $content .= '<tr>';
-    $content .= '<td><a href="viewforum.php?id=' . $forum_row['id'] . '">' . $forum_row['name'] . '</a></td>';
+    $content .= '<td><a href="viewforum.php?id=' . $forum_row['id'] . '">' . $forum_row['name'] . '</a><br>';
+    $content .= $forum_row['description'] . '</td>';
     $content .= '<td>' . $num_topics->rowCount() . '</td>';
     $content .= '<td>' . $num_posts->rowCount() . '</td>';
     $content .= '</tr>';

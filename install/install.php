@@ -70,6 +70,7 @@ try {
     $stmt = $pdo->prepare("CREATE TABLE `{$_POST['table-prefix']}_forums` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
+  `description` text,
   `category_id` int
 )");
     exit_if_failure($stmt);

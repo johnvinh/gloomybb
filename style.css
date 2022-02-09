@@ -60,6 +60,15 @@ a, a:visited {
     background-color: #F2F2EC;
 }
 
+.category-block > table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+.category-block thead:first-child {
+    background-color: antiquewhite;
+}
+
 .category-block:nth-child(odd) {
     background-color: #FAF4EF;
 }

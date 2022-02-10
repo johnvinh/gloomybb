@@ -63,7 +63,8 @@ $content .= '</dl>';
 // Post details
 $content .= '<div class="post-content">';
 // Delete button
-if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $result['user_id'] || $_SESSION['user_id'] === 1) {
+if ((isset($_SESSION['user_id']) && ($_SESSION['user_id'] === $result['user_id']))
+    || (isset($_SESSION['user_id']) && $_SESSION['user_id'] === 1)) {
     $content .= '<div class="post-actions">';
     $content .= '<a class="button" href="deletetopic.php?id=' . $result['id'] . '">Delete</a>';
     $content .= '</div>';

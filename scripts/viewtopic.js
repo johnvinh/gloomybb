@@ -1,7 +1,7 @@
 function getTopicId()
 {
-    const regex = new RegExp('^.+?\\?id=(.+)$');
-    return regex.exec(window.location.href)[1];
+    const regex = /^.+?\\?id=(?<id>.+)$/
+    return regex.exec(window.location.href).groups.id;
 }
 
 document.querySelector('#new-reply').addEventListener('click', (e) =>

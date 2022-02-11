@@ -1,4 +1,4 @@
-document.querySelector('input[name=login]').addEventListener('click', (e) =>
+function addErrorAndCancel(e)
 {
     const errorSpace = document.querySelector('main > div:first-child');
     const username = document.querySelector('#username').value;
@@ -21,4 +21,20 @@ document.querySelector('input[name=login]').addEventListener('click', (e) =>
         return;
     }
     e.target.parentElement.submit();
-});
+}
+
+const login = document.querySelector('input[name=login]');
+const signup = document.querySelector('input[name=signup]');
+
+if (login !== null) {
+    login.addEventListener('click', (e) =>
+    {
+        addErrorAndCancel(e);
+    });
+}
+else if (signup !== null) {
+    signup.addEventListener('click', (e) =>
+    {
+        addErrorAndCancel(e);
+    });
+}

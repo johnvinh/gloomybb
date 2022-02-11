@@ -70,5 +70,5 @@ $content = '<form action="signup.php" method="post">
             <input type="submit" value="Sign-up" name="signup">
         </form>';
 
-$page = new Page($title, $navigation, $content);
+$page = new Page($title, $navigation, $content, "scripts/login.js");
 $page->write_html();

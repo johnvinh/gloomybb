@@ -85,7 +85,7 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     $_SESSION['username'] = $_POST['username'];
     $_SESSION['user_id'] = $results['id'];
 
-    $page = new Page('Login', $navigation, 'Login successful! Redirecting to homepage...', "scripts/login.js");
+    $page = new Page('Login', $navigation, '<p>Login successful! Redirecting to homepage...</p>', "scripts/login.js");
     $page->write_html();
     header("refresh:2;url=index.php");
     // Close database connection

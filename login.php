@@ -85,10 +85,12 @@ if (isset($_POST['login']) && $_POST['login'] === "Login!") {
     $_SESSION['username'] = $_POST['username'];
     $_SESSION['user_id'] = $results['id'];
 
-    echo 'Login successful! Redirecting to homepage...';
+    $page = new Page('Login', $navigation, 'Login successful! Redirecting to homepage...', "scripts/login.js");
+    $page->write_html();
     header("refresh:2;url=index.php");
     // Close database connection
     $pdo = null;
+    die();
 }
 
 $title = 'Login';

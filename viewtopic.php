@@ -54,11 +54,14 @@ $content .= '<div class="post">';
 // User details
 $content .= '<dl>';
 $content .= '<dt>Username</dt>';
-$user_stmt = $pdo->prepare("SELECT username FROM {$table_prefix}_users WHERE id = ?");
+$user_stmt = $pdo->prepare("SELECT * FROM {$table_prefix}_users WHERE id = ?");
 $user_stmt->execute([$result['user_id']]);
-$content .= '<dd>' . $user_stmt->fetch()['username'] . '</dd>';
+$user_stmt = $user_stmt->fetch();
+$content .= '<dd>' . $user_stmt['username'] . '</dd>';
 $content .= '<dt>Posted At</dt>';
 $content .= '<dd>' . $result['posted_at'] . '</dd>';
+$content .= '<dt>User Joined</dt>';
+$content .= '<dd>' . $user_stmt['joined_at'] . '</dd>';
 $content .= '</dl>';
 // Post details
 $content .= '<div class="post-content">';

@@ -56,6 +56,12 @@ nav a {
     font-weight: bold;
 }
 
+.category-block a {
+    display: block;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
 .category-block tr:nth-child(odd) {
     background-color: #f9f9f9;
 }

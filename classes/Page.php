@@ -7,13 +7,15 @@ class Page
     private string $content;
     private string $navigation;
     private string $script;
+    private string $style;
 
-    public function __construct(string $title, string $navigation, string $content, string $script='')
+    public function __construct(string $title, string $navigation, string $content, string $script='', string $style="home.css")
     {
         $this->title = $title;
         $this->navigation = $navigation;
         $this->content = $content;
         $this->script = $script;
+        $this->style = $style;
     }
 
     public function write_html()
@@ -24,7 +26,7 @@ class Page
         <head>
             <title><?php echo FORUM_NAME . ' - ' . "$this->title"; ?></title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="<?php echo $this->style; ?>">
         </head>
     <body>
     <div id="content">

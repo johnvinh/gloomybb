@@ -1,97 +1,60 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #FAFAFA;
-    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
 }
 
-#content header {
-    background-color: #DB5461;
-    color: #E3F2FD;
-    text-align: center;
-    padding: 1em;
+a {
+    color: #00b0ff;
+    text-decoration: none;
 }
 
-#content header a {
-    color: #E3F2FD;
+a:hover {
+    text-decoration: underline;
 }
 
-#content h1 {
-    margin: 0;
-}
-
-#content main {
-    margin: auto;
-    width: 60%;
-}
-
-main table {
-    table-layout: fixed;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+h1 {
+    font-size: 2em;
+    margin: 0.5em 0;
     text-align: center;
 }
 
-a, a:visited {
-    color: #686963;
-}
-
-.post {
+header {
+    background-color: #333;
+    color: #fff;
     padding: 1em;
-    display: flex;
-    background-color: #F2F2EC;
 }
 
-.post dl {
-    white-space: nowrap;
-    margin-right: 1em;
-}
-
-.post:nth-child(odd) {
-    background-color: #FAF4EF;
+nav a {
+    display: inline-block;
+    margin: 0 1em;
+    color: #fff;
 }
 
 .category-block {
-    padding: 1em;
-    background-color: #F2F2EC;
+    margin: 1em 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
-.category-block > table {
-    border-collapse: separate;
-    border-spacing: 0 1em;
-}
-
-.category-block thead:first-child {
-    background-color: antiquewhite;
-}
-
-.category-block:nth-child(odd) {
-    background-color: #FAF4EF;
-}
-
-.post-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.topics {
+.category-block table {
+    width: 100%;
     border-collapse: collapse;
 }
 
-.topics tr {
-    background-color: #F2F2EC;
-}
-
-.topics tr:nth-child(odd) {
-    background-color: #FAF4EF;
-}
-
-.error {
+.category-block th,
+.category-block td {
     padding: 0.5em;
-    color: #fff;
-    background-color: #960c23;
+    text-align: left;
+    vertical-align: top;
+}
+
+.category-block th {
+    background-color: #eee;
+    font-weight: bold;
+}
+
+.category-block tr:nth-child(odd) {
+    background-color: #f9f9f9;
 }

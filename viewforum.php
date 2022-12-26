@@ -89,5 +89,5 @@ foreach ($stmt as $row) {
 $content .= '</tbody></table>';
 $script = 'scripts/viewforum.js';
 
-$page = new Page($title, $navigation, $content, $script);
+$page = new Page($title, $navigation, $content, $script, "viewforum.css");
 $page->write_html();

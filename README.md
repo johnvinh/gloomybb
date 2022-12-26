@@ -4,7 +4,7 @@
 <img src="https://www.johnvinh.dev/images/gloomybb-title.svg">
 </p>
 
-![GloomyBB](https://i.imgur.com/ZcDjdxG.png)
+![GloomyBB](https://i.imgur.com/2WiP7Tf.png)
 GloomyBB is a simple forum software written in vanilla PHP with a MariaDB/MySQL database.
 It is currently still in early development but is usable despite lacking many modern forum features.
 ## Usage

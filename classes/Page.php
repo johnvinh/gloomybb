@@ -9,7 +9,7 @@ class Page
     private string $script;
     private string $style;
 
-    public function __construct(string $title, string $navigation, string $content, string $script='', string $style="home.css")
+    public function __construct(string $title, string $navigation, string $content, string $script='', string $style="")
     {
         $this->title = $title;
         $this->navigation = $navigation;
@@ -26,7 +26,15 @@ class Page
         <head>
             <title><?php echo FORUM_NAME . ' - ' . "$this->title"; ?></title>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="<?php echo $this->style; ?>">
+            <link rel="stylesheet" href="normalize.css">
+            <?php
+            if ($this->style != "") {
+                ?>
+                <link rel="stylesheet" href="<?php echo $this->style; ?>">
+                <?php
+            }
+            ?>
+            <link rel="stylesheet" href="sakura.css">
         </head>
     <body>
     <div id="content">

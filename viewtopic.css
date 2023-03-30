@@ -18,32 +18,32 @@ a:hover {
     text-decoration: underline;
 }
 
-h1 {
+/*h1 {
     font-size: 2em;
     margin: 0.5em 0;
     text-align: center;
-}
+}*/
 
-header {
+/*header {
     background-color: #333;
     color: #fff;
     padding: 1em;
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+}*/
 
-nav {
+/*nav {
     display: flex;
-}
+}*/
 
-nav a {
+/*nav a {
     display: inline-block;
     margin: 0 1em;
     color: #fff;
     font-weight: bold;
     text-transform: uppercase;
-}
+}*/
 
 .post-actions {
     margin: 1em 0;
